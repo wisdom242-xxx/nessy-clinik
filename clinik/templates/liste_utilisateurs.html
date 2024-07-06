@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block 'content' %}
+{% load static %}
+<title>Liste des Utilisateurs</title>
+    <style>
+       
+        h2 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    color: #333; /* Change the text color */
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #00D9A5;
+    color: #fff;
+}
+
+        tbody tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        button {
+            background-color: #dc3545;
+            color: #fff;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #c82333;
+        }
+        tbody tr:hover {
+            background-color: #00D9A5;
+        }
+    </style>
+</head>
+<body>
+    <h2>Liste des Utilisateurs</h2>
+    <a href="{% url 'accueil' %}">Retour à l'accueil</a>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Adresse</th>
+                <th>Numéro de Téléphone</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for utilisateur in utilisateurs %}
+            <tr>
+                <td>{{ utilisateur.id }}</td>
+                <td>{{ utilisateur.nom }}</td>
+                <td>{{ utilisateur.prenom }}</td>
+                <td>{{ utilisateur.adresse }}</td>
+                <td>{{ utilisateur.num_tel }}</td>
+                <td class="actions">
+                    <form method="post" action="{% url 'supprimer_utilisateur' utilisateur.id %}">
+                        {% csrf_token %}
+                        <button type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endblock 'content' %}
+

@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block 'content' %}
+{% load static %}
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #00D9A5;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: gray;
+        }
+    </style>
+</head>
+<body>
+    <h2>Modifier Produit</h2>
+    <form method="post" action="{% url 'modifier_produit' produit.id_produit %}">
+        {% csrf_token %}
+        <label for="designation">Désignation:</label>
+        <input type="text" id="designation" name="designation" value="{{ produit.designation }}" required>
+        
+        <label for="quantite">Quantité:</label>
+        <input type="number" id="quantite" name="quantite" value="{{ produit.quantite }}" required>
+        
+        <label for="prix_unitaire">Prix unitaire:</label>
+        <input type="text" id="prix_unitaire" name="prix_unitaire" value="{{ produit.prix_unitaire }}" required>
+        
+        <button type="submit">Enregistrer les modifications</button>
+    </form>
+    {% endblock 'content' %}
+

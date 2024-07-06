@@ -1,0 +1,245 @@
+ 
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="copyright" content="MACode ID, https://macodeid.com/">
+  <title>One LIFE - Medical Center </title>
+
+  
+  <link rel="stylesheet" href="{% static 'assets/css/maicons.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/vendor/owl-carousel/css/owl.carousel.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/vendor/animate/animate.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/theme.css' %}">
+</head>
+<body>
+
+  <!-- Back to top button -->
+  <div class="back-to-top"></div>
+
+  <header>
+    <div class="topbar">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8 text-sm">
+            <div class="site-info">
+              <a href="#"><span class="mai-call text-primary"></span> +00 123 4455 6666</a>
+              <span class="divider">|</span>
+              <a href="#"><span class="mai-mail text-primary"></span> mail@example.com</a>
+            </div>
+          </div>
+          <div class="col-sm-4 text-right text-sm">
+            <div class="social-mini-button">
+              <a href="#"><span class="mai-logo-facebook-f"></span></a>
+              <a href="#"><span class="mai-logo-twitter"></span></a>
+              <a href="#"><span class="mai-logo-dribbble"></span></a>
+              <a href="#"><span class="mai-logo-instagram"></span></a>
+            </div>
+          </div>
+        </div> <!-- .row -->
+      </div> <!-- .container -->
+    </div> <!-- .topbar -->
+
+    <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
+      <div class="container">
+        <a class="navbar-brand" href="#"><span class="text-primary">One</span>-LIFE</a>
+
+        <form action="#">
+          <div class="input-group input-navbar">
+            <div class="input-group-prepend">
+            </div>
+          </div>
+        </form>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupport" aria-controls="navbarSupport" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+       <div class="collapse navbar-collapse" id="navbarSupport">
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item active">
+      <a class="nav-link" href="{% url 'accueil' %}">Home</a>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="patientsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Patients
+      </a>
+      <div class="dropdown-menu" aria-labelledby="patientsDropdown">
+        <a class="dropdown-item" href="{% url 'liste_patients' %}">Liste des patients</a>
+        <a class="dropdown-item" href="{% url 'ajout_patient' %}">Ajout patient</a>
+      </div>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'liste_utilisateurs' %}">Utilisateurs</a>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="ventesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Ventes
+      </a>
+      <div class="dropdown-menu" aria-labelledby="ventesDropdown">
+        <a class="dropdown-item" href="{% url 'liste_vente' %}">Liste des ventes</a>
+        <a class="dropdown-item" href="{% url 'vendre_produit' %}">Vendre produit</a>
+      </div>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="produitsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Produits
+      </a>
+      <div class="dropdown-menu" aria-labelledby="produitsDropdown">
+        <a class="dropdown-item" href="{% url 'affiche_produits' %}">Afficher produits</a>
+        <a class="dropdown-item" href="{% url 'ajout_produit' %}">Ajout produit</a>
+      </div>
+    </li>
+    <li class="nav-item">
+      <a class="btn btn-primary ml-lg-3" href="{% url 'rapport_mensuel' %}">Rapport Mensuel</a>
+    </li>
+ 
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}">Déconnexion</a>
+      </li>
+   
+  </ul>
+</div> <!-- .navbar-collapse -->
+
+      </div> <!-- .container -->
+    </nav>
+  </header>
+
+  <div class="page-hero bg-image overlay-dark" style="background-image: url({% static 'assets/img/bg_image_1.jpg' %});">
+    <div class="hero-section">
+      <div class="container text-center wow zoomIn">
+        <span class="subhead">Let's make your life happier</span>
+        <h1 class="display-4">NESSY Living</h1>
+        <a href="{% url 'liste_patients' %}" class="btn btn-primary">liste patients</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-light">
+    <div class="page-section py-3 mt-md-n5 custom-index">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-4 py-3 py-md-0">
+            <div class="card-service wow fadeInUp">
+              <div class="circle-shape bg-secondary text-white">
+                <span class="mai-chatbubbles-outline"></span>
+              </div>
+              <p><span>Chat</span> with a doctors</p>
+            </div>
+          </div>
+          <div class="col-md-4 py-3 py-md-0">
+            <div class="card-service wow fadeInUp">
+              <div class="circle-shape bg-primary text-white">
+                <span class="mai-shield-checkmark"></span>
+              </div>
+              <p><span>One</span>-LIFE Protection</p>
+            </div>
+          </div>
+          <div class="col-md-4 py-3 py-md-0">
+            <div class="card-service wow fadeInUp">
+              <div class="circle-shape bg-accent text-white">
+                <span class="mai-basket"></span>
+              </div>
+              <p><span>One</span>-LIFE Pharmacy</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> <!-- .page-section -->
+
+
+  <div class="page-section">
+    <div class="container">
+      {% block 'content' %}
+      
+      
+      
+      {% endblock 'content' %}
+    </div> <!-- .container -->
+  </div> <!-- .page-section -->
+
+  <div class="page-section banner-home bg-image" style="background-image: url({% static 'assets/img/banner-pattern.svg' %});">
+    <div class="container py-5 py-lg-0">
+      <div class="row align-items-center">
+        <div class="col-lg-4 wow zoomIn">
+          <div class="img-banner d-none d-lg-block">
+            <img src="{% static 'assets/img/mobile_app.png' %}" alt="">
+          </div>
+        </div>
+        <div class="col-lg-8 wow fadeInRight">
+          <h1 class="mb-4">With NESSY Living Get easy access of all features using One LIFE Application</h1>
+          <a href="#"><img src="{% static 'assets/img/google_play.svg' %}" alt=""></a>
+          <a href="#" class="ml-2"><img src="{% static 'assets/img/app_store.svg' %}" alt=""></a>
+        </div>
+      </div>
+    </div>
+  </div> <!-- .banner-home -->
+
+  <footer class="page-footer">
+    <div class="container">
+      <div class="row px-md-3">
+        <div class="col-sm-6 col-lg-3 py-3">
+          <h5>Company</h5>
+          <ul class="footer-menu">
+            <li><a href="{% url 'accueil' %}">accueil</a></li>
+            <li>
+              <a class="nav-link" href="{% url 'vendre_produit'%}">vendre_produit</a>
+            </li>
+            <li >
+              <a class="nav-link" href="{% url 'ajout_patient'%}">Ajout patient</a>
+            </li>
+            <li>
+              <a class="nav-link" href="{% url 'ajout_produit'%}">Ajout produit</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm-6 col-lg-3 py-3">
+          <h5>More</h5>
+          <ul class="footer-menu">
+            <li>Terms & Condition</li>
+            <li>Privacy
+            <li>Advertise
+            <li>Join as Doctors</li>
+          </ul>
+        </div>
+        <div class="col-sm-6 col-lg-3 py-3">
+          <h5>Our partner</h5>
+          <ul class="footer-menu">
+            <li>One-Fitness</li>
+            <li>One-Drugs</li>
+            <li>One-Live</li>
+          </ul>
+        </div>
+        <div class="col-sm-6 col-lg-3 py-3">
+          <h5>Contact</h5>
+          <p class="footer-link mt-2">351 rue Willow  Franklin, MA 02038</p>
+          <li>701-573-7582</li>
+          <li>nessymishaamour@gmail.com</li>
+
+         
+        </div>
+      </div>
+
+      <hr>
+
+      <p id="copyright">Copyright &copy; 2020 <a href="#" target="_blank">Macro Software</a>. All right reserved</p>
+    </div>
+  </footer>
+
+  <script src="{% static 'assets/js/jquery-3.5.1.min.js' %}"></script>
+
+  <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+
+  <script src="{% static 'assets/vendor/owl-carousel/js/owl.carousel.min.js' %}"></script>
+
+  <script src="{% static 'assets/vendor/wow/wow.min.js' %}"></script>
+
+  <script src="{% static 'assets/js/theme.js' %}"></script>
+
+</body>
+</html>

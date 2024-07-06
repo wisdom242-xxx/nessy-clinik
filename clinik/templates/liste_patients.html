@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block 'content' %}
+
+
+
+<style>
+
+  
+
+    h1 {
+        text-align: center;
+        color: #00D9A5;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #00D9A5;
+        color: #fff;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .delete-btn, .update-btn {
+        background-color: #dc3545;
+        color: #fff;
+        border: none;
+        padding: 8px 12px;
+        cursor: pointer;
+        border-radius: 4px;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .delete-btn:hover, .update-btn:hover {
+        background-color: #c82333;
+    }
+    .update-btn {
+        background-color: #00D9A5; /* sky blue color */
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+    }
+    
+    .update-btn:hover {
+        background-color: #66CCCC; /* darker sky blue color on hover */
+    }
+
+    tbody tr:hover {
+        background-color: #00D9A5;
+    }
+</style>
+</head>
+<body>
+<div class="container1">
+    <h1 class="mt-4 mb-4">Liste des Patients</h1>
+     <!-- Ajout du lien -->
+     <a href="{% url 'ajout_patient' %}" class="add-btn">Ajouter un patient</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">A consulté</th>
+                <th scope="col">Est hospitalisé</th>
+                <th scope="col">Est examiné</th>
+                <th scope="col">Service</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for patient in patients %}
+                <tr>
+                    <td>{{ patient.nom }}</td>
+                    <td>{{ patient.a_consulte }}</td>
+                    <td>{{ patient.est_hospitalise }}</td>
+                    <td>{{ patient.est_examine }}</td>
+                    <td>{{ patient.service.nom }}</td>
+                    <td class="actions">
+                        <form method="post" action="{% url 'supprimer_patient' patient.id_patient %}">
+                            {% csrf_token %}
+                            <input type="submit" class="delete-btn" value="Supprimer">
+                        </form>
+                        <a href="{% url 'modifier_patient' patient.id_patient %}" class="update-btn">Modifier</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        
+    </table>
+</div>
+
+
+
+
+
+{% endblock 'content' %}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire de Connexion</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        form {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            max-width: 100%;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #555555;
+            text-align: left;
+        }
+
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #dddddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #00D9A5;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: gray;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 12px;
+            color: #666666;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        a:hover {
+            color: #333333;
+        }
+
+        .error-message {
+            color: #FF6347;
+            margin-top: 12px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <h2>Connexion Utilisateur</h2>
+
+        <label for="nom">Nom d'utilisateur:</label>
+        <select name="nom" id="nom" required>
+            {% for nom_utilisateur in noms_utilisateurs %}
+                <option value="{{ nom_utilisateur }}" {% if nom_utilisateur == nom_pre_rempli %}selected{% endif %}>{{ nom_utilisateur }}</option>
+            {% endfor %}
+        </select>
+
+
+        <label for="password">Mot de passe:</label>
+        <input type="password" name="password" id="password" required>
+
+        <button type="submit">Se connecter</button>
+        <a href="{% url 'enregistrer_utilisateur' %}">S'inscrire</a>
+
+        {% if erreur %}
+            <p class="error-message">{{ erreur }}</p>
+        {% endif %}
+    </form>
+</body>
+</html>

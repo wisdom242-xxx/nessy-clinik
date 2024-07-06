@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block 'content' %}
+{% load static %}
+
+
+    <style>
+       
+
+        h2 {
+            text-align: center;
+            color: #00D9A5;
+        }
+
+        .p1 {
+            margin-bottom: 10px;
+        }
+
+        /* Styling pour chaque paragraphe */
+        .p1:nth-child(even) {
+            background-color: #00D9A5;
+            padding: 10px;
+        }
+
+        /* Styling pour les valeurs numériques */
+        .p1:nth-child(odd) {
+            font-weight: bold;
+            color: #00D9A5;
+        }
+
+        /* Ajouter un espace après chaque paragraphe */
+        p + p {
+            margin-top: 15px;
+        }
+        tbody tr:hover {
+            background-color: #00D9A5;
+        }
+    </style>
+</head>
+<body>
+   
+    <h2>Rapport Mensuel</h2>
+
+    <p class="p1">Mois: {{ rapport.mois }}</p>
+    <p class="p1">Patients Consultés: {{ rapport.patients_consultes }}</p>
+    <p class="p1">Patients Hospitalisés: {{ rapport.patients_hospitalises }}</p>
+    <p class="p1">Patients Examinés: {{ rapport.patients_examines }}</p>
+    <p class="p1">Montant des Ventes: {{ rapport.montant_ventes }} FCFA</p>
+    <p class="p1">Bénéfice Réalisé: {{ rapport.benefice_realise }} FCFA</p>
+
+    {% endblock 'content' %}

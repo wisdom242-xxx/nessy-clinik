@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block 'content' %}
+{% load static %}
+
+ <title>Modifier un Patient</title>
+    
+    <!-- Ajout de styles CSS directement dans la page -->
+    <style>
+      
+        .container1 {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            font-size: 24px;
+            color: #007bff;
+            text-align: center;
+        }
+        .form-group, .form-check {
+            margin-bottom: 15px;
+        }
+        .form-group label, .form-check label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+        }
+        .form-check input {
+            margin-right: 10px;
+        }
+        .btn {
+            display: inline-block;
+            font-weight: 400;
+            color: #fff;
+            text-align: center;
+            vertical-align: middle;
+            user-select: none;
+            background-color: #00D9A5;
+            border: 1px solid #007bff;
+            padding: 10px 20px;
+            font-size: 16px;
+            line-height: 1.5;
+            border-radius: 4px;
+            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+    </style>
+</head>
+<body>
+    <div class="container1">
+        <h1 class="mt-4 mb-4">Modifier un Patient</h1>
+        <form method="post" action="{% url 'modifier_patient' patient.id_patient %}" class="needs-validation" novalidate>
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="id_nom">Nom du Patient:</label>
+                <input type="text" name="nom" id="id_nom" value="{{ patient.nom }}" required>
+            </div>
+            
+            <div class="form-check">
+                <input type="checkbox" name="a_consulte" id="id_a_consulte" {% if patient.a_consulte %}checked{% endif %}>
+                <label for="id_a_consulte">A consulté</label>
+            </div>
+            
+            <div class="form-check">
+                <input type="checkbox" name="est_hospitalise" id="id_est_hospitalise" {% if patient.est_hospitalise %}checked{% endif %}>
+                <label for="id_est_hospitalise">Est hospitalisé</label>
+            </div>
+            
+            <div class="form-check">
+                <input type="checkbox" name="est_examine" id="id_est_examine" {% if patient.est_examine %}checked{% endif %}>
+                <label for="id_est_examine">Est examiné</label>
+            </div>
+            
+            <div class="form-group">
+                <label for="id_service">Service:</label>
+                <select name="service" id="id_service" required>
+                    {% for service in services %}
+                        <option value="{{ service.id }}" {% if service.id == patient.service.id %}selected{% endif %}>{{ service.nom }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+           <center> <button type="submit" class="btn btn-primary">Enregistrer les modifications</button></cente>
+        </form>
+    </div>
+
+{% endblock 'content' %}

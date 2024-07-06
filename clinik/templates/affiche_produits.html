@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% block 'content' %}
+{% load static %}
+
+<title>Affichage des Produits</title>
+    <style>
+       
+
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #00D9A5;
+            color: white;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .delete-btn, .update-btn {
+            background-color: #e44d26;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .delete-btn:hover, .update-btn:hover {
+            background-color: #c2351e;
+        }
+
+        .add-btn {
+            background-color: #00D9A5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-btn:hover {
+            background-color: #00D9A5;
+        }
+        .update-btn {
+            background-color: #00D9A5; /* sky blue color */
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .update-btn:hover {
+            background-color: #66CCCC; /* darker sky blue color on hover */
+        }
+        tbody tr:hover {
+            background-color: #00D9A5;
+        }
+    </style>
+</head>
+<body>
+    
+    <h2>Liste des Produits</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Désignation</th>
+                <th>Quantité</th>
+                <th>Prix unitaire</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for produit in produits %}
+                <tr>
+                    <td>{{ produit.designation }}</td>
+                    <td>{{ produit.quantite }}</td>
+                    <td>{{ produit.prix_unitaire }} FCFA</td>
+                    <td class="actions">
+                        <form method="post" action="{% url 'supprimer_produit' produit.id_produit %}">
+                            {% csrf_token %}
+                            <input type="submit" class="delete-btn" value="Supprimer">
+                        </form>
+                        <a href="{% url 'modifier_produit' produit.id_produit %}" class="update-btn">Modifier</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endblock 'content' %}

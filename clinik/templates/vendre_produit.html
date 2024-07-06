@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block 'content' %}
+{% load static %}
+
+<style>
+   
+
+    h1 {
+        color: #00D9A5;
+        
+    }
+
+    form {
+        max-width: 400px;
+        margin: 20px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        color: #333;
+    }
+
+    select, input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    p {
+        margin-bottom: 15px;
+        color: #333;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border: 1px solid #ddd;
+        background-color: #f2f2f2;
+        color: #333;
+    }
+
+    th {
+        background-color: #3498db;
+        color: white;
+    }
+
+    tbody tr:hover {
+        background-color: #e0e0e0;
+    }
+
+    button {
+        background-color: #00D9A5; /* Couleur bleue */
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    button:hover {
+        background-color: #005c99; /* Couleur bleue plus foncée au survol */
+    }
+</style>
+</head>
+<body>
+<h1>Vente de Produit</h1>
+
+{% if erreur %}
+    <p style="color: red;">{{ erreur }}</p>
+{% endif %}
+
+<form method="post" action="{% url 'vendre_produit' %}">
+    {% csrf_token %}
+
+    <label for="produit">Produit:</label>
+    <select name="produit" id="produit" required>
+        {% for produit in produits %}
+            <option value="{{ produit.id_produit }}" data-prix="{{ produit.prix_unitaire }}">{{ produit.designation }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="quantite">Quantité à vendre:</label>
+    <input type="number" name="quantite" id="quantite" min="1" required>
+
+    <!-- Ajout du champ pour la date de vente -->
+    <input type="hidden" name="date_vente" value="{{ timezone.now }}">
+
+    <!-- Affichage du prix unitaire -->
+    <p>Prix unitaire: <span id="prix_unitaire"></span> FCFA</p>
+
+    <label for="prix_de_vente">Prix de vente:</label>
+    <input type="number" id="prix_de_vente" name="prix_de_vente" required>
+
+    <button type="submit">Vendre</button>
+</form>
+
+<script>
+    // Script pour mettre à jour le prix unitaire lors de la sélection du produit
+    document.getElementById('produit').addEventListener('change', function() {
+        var selectedOption = this.options[this.selectedIndex];
+        var prixUnitaire = selectedOption.getAttribute('data-prix');
+        document.getElementById('prix_unitaire').innerText = prixUnitaire;
+    });
+</script>
+
+
+{% endblock 'content' %}
